@@ -8,19 +8,19 @@ import { useState } from "react";
 import { Button } from "../../../components/ui/button";
 import { Separator } from "../../../components/ui/separator";
 import { PromptCard } from "@/features/prompts/components/prompt_card";
+import { PromptType } from "@/types/prompts";
 
 export const PromptCardList = ({
-  items,
+  prompts,
   className,
 }: {
-  items: {
-    title: string;
-    description: string;
-    link: string;
-  }[];
+  prompts: PromptType[];
   className?: string;
 }) => {
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  console.log("prompts",prompts);
+  
 
   return (
     <div
@@ -29,10 +29,10 @@ export const PromptCardList = ({
         className
       )}
     >
-      {items.map((item, idx) => (
+      {prompts?.map((prompt, idx) => (
         <Link
-          href={item?.link}
-          key={item?.link}
+          href=""
+          key={prompt?.prompt_id}
           className="relative group  block p-2 h-full w-full"
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
@@ -59,7 +59,7 @@ export const PromptCardList = ({
               <div className="flex gap-2">
                 <Hash className="h-6 w-6" />
                 <h3 className="font-bold text-lg max-w-[12rem] truncate">
-                    {item?.title}
+                    {prompt?.title}
                     </h3>
               </div>
               <Bookmark />
@@ -67,22 +67,23 @@ export const PromptCardList = ({
             <div className="min-h-[80px] max-h-[100px] overflow-hidden">
             <p className="text-sm mt-2 text-muted-foreground">
                 <Truncate str={
-                    item?.description
+                    prompt?.text
                     } max={100} len={100} />
                 </p>
             </div>
-            <div className="flex h-5 items-center space-x-4 text-sm">
+            <div className="flex h-5 prompts-center space-x-4 text-sm pb-10">
                 <Button size="sm" variant="outline" className="items-center gap-2 bg-muted" >
                 <ThumbsUp size={15} />
                 <span>64</span>
                 </Button>
                 <Separator orientation="vertical" />
-                <Button size="sm" variant="outline" className="items-center gap-2 bg-muted" >
+                {
+                  prompt.tags.split(",").map((tag) => (
+                    <Button size="sm" variant="outline" className="items-center gap-2 bg-muted"  key={tag}>
                 <span>website</span>
                 </Button>
-                <Button size="sm" variant="outline" className="items-center gap-2 bg-muted" >
-                <span>News</span>
-                </Button>
+                  ))
+                }
             </div>
           </PromptCard>
         </Link>
