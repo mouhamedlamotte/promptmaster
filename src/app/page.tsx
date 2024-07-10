@@ -1,3 +1,5 @@
+"use client";
+
 import { PromptList } from "@/features/prompts/pages/prompt_list";
 import { AppLayout } from "./lay";
 

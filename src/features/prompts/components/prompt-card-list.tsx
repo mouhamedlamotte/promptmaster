@@ -78,7 +78,7 @@ export const PromptCardList = ({
                 </Button>
                 <Separator orientation="vertical" />
                 {
-                  prompt.tags.split(",").map((tag) => (
+                  prompt?.tags?.split(",").map((tag) => (
                     <Button size="sm" variant="outline" className="items-center gap-2 bg-muted"  key={tag}>
                 <span>website</span>
                 </Button>

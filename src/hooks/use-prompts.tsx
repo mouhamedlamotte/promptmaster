@@ -1,3 +1,6 @@
+"use client"
+
+
 import Axiosinstance from "@/lib/axios"
 import { PromptType } from "@/types/prompts"
 import { useQuery } from "@tanstack/react-query"
